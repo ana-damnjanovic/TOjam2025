@@ -5,23 +5,26 @@ public class GameOverGameState : IGameState
     private static string STATE_NAME = "GameOverGameState";
     public string StateName => STATE_NAME;
 
+    public event System.Action RestartGameRequested = delegate { };
+
     public void OnEnter(string previous)
     {
-        throw new System.NotImplementedException();
+        // TODO: show game over menu
+        // TODO: clean up, delete player and tell game manager to reset level progress
     }
 
     public void OnExit(string next)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnOverride(string next)
     {
-        throw new System.NotImplementedException();
+        // game over state probably won't have an override
     }
 
     public void OnResume(string previous)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

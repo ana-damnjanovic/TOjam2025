@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class MainMenuGameState : IGameState
 {
-    public string StateName => throw new System.NotImplementedException();
+    private static string STATE_NAME = "MainMenuGameState";
+    public string StateName => STATE_NAME;
+
+    public event System.Action PlayGameRequested = delegate { };
 
     public void OnEnter(string previous)
     {
-        throw new System.NotImplementedException();
+        // TODO: listen to main menu buttons and throw PlayGameRequested event when the play button gets pressed
     }
 
     public void OnExit(string next)
     {
-        throw new System.NotImplementedException();
+        // TODO: unsubscribe from menu
     }
 
     public void OnOverride(string next)
     {
-        throw new System.NotImplementedException();
+        // main menu will not be overridden/resumed
     }
 
     public void OnResume(string previous)
     {
-        throw new System.NotImplementedException();
+        // main menu will not be overridden/resumed
     }
 }
