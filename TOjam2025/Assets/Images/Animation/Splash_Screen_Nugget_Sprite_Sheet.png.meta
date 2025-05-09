@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Splash_Screen_Nugget_Sprite_Sheet_0: 1886537817692806017
+      Splash_Screen_Nugget_Sprite_Sheet_1: 2404831554072264561
+      Splash_Screen_Nugget_Sprite_Sheet_2: 2969516501094171522
+      Splash_Screen_Nugget_Sprite_Sheet_3: 479905519818278912
+      Splash_Screen_Nugget_Sprite_Sheet_4: 8438837858307462901
+      Splash_Screen_Nugget_Sprite_Sheet_5: 3286659767469107477
+      Splash_Screen_Nugget_Sprite_Sheet_6: 8869642636827125183
+      Splash_Screen_Nugget_Sprite_Sheet_7: 6959269888083787877
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
