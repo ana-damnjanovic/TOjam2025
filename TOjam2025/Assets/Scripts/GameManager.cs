@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class GameManager : MonoBehaviour
     private PauseGameState m_pauseState;
     private GameOverGameState m_gameOverGameState;
 
+    private PlayerInput m_playerInput;
+    private PlayerInputRelay m_playerInputRelay;
 
     private void Awake()
     {
         m_splashUiController = FindAnyObjectByType<SplashUiController>();
+
+        m_playerInput = FindFirstObjectByType<PlayerInput>();
+        m_playerInputRelay = m_playerInput.GetComponent<PlayerInputRelay>();
+
         m_sceneLoader = FindAnyObjectByType<SceneLoader>();
         m_sceneLoader.SceneLoadCompleted += OnSceneLoadCompleted;
         m_sceneLoader.Initialize();
@@ -38,11 +45,11 @@ public class GameManager : MonoBehaviour
         m_mainMenuState = new MainMenuGameState();
         m_mainMenuState.PlayGameRequested += OnPlayGameRequested;
 
-        m_gameplayState = new GameplayGameState();
+        m_gameplayState = new GameplayGameState(m_playerInput, m_playerInputRelay);
         m_gameplayState.GameOverRequested += OnGameOverRequested;
         m_gameplayState.PauseRequested += OnPauseRequested;
 
-        m_pauseState = new PauseGameState();
+        m_pauseState = new PauseGameState(m_playerInput);
         m_pauseState.ResumeRequested += OnResumeRequested;
 
         m_gameOverGameState = new GameOverGameState();

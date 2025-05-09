@@ -13,10 +13,10 @@ public class PauseGameState : IGameState
     private PauseMenuUiController m_pauseMenuUiController;
     private PlayerInput m_playerInput;
 
-    public PauseGameState()
+    public PauseGameState(PlayerInput playerInput)
     {
         m_pauseMenuUiController = GameObject.FindFirstObjectByType<PauseMenuUiController>();
-        m_playerInput = GameObject.FindFirstObjectByType<PlayerInput>();
+        m_playerInput = playerInput;
     }
 
     public void OnEnter(string previous)
