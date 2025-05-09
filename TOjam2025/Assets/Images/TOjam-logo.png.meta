@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TOjam-logo_0: 5922235899317343354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private SceneLoader m_sceneLoader;
+    private SplashUiController m_splashUiController;
 
     private GameStateMachine m_gameStateMachine;
     private MainMenuGameState m_mainMenuState;
@@ -13,14 +14,19 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        m_splashUiController = FindAnyObjectByType<SplashUiController>();
         m_sceneLoader = FindAnyObjectByType<SceneLoader>();
         m_sceneLoader.SceneLoadCompleted += OnSceneLoadCompleted;
         m_sceneLoader.Initialize();
+
+        m_splashUiController.ShowSplash();
     }
 
     private void OnSceneLoadCompleted()
     {
         m_sceneLoader.SceneLoadCompleted -= OnSceneLoadCompleted;
+
+        m_splashUiController.HideSplash();
         InitializeGameStates();
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MainMenuGameState : IGameState
@@ -7,14 +8,28 @@ public class MainMenuGameState : IGameState
 
     public event System.Action PlayGameRequested = delegate { };
 
+    private MainMenuUiController m_mainMenuUiController;
+
+    public MainMenuGameState()
+    {
+        m_mainMenuUiController = GameObject.FindFirstObjectByType<MainMenuUiController>();
+    }
+
     public void OnEnter(string previous)
     {
-        // TODO: listen to main menu buttons and throw PlayGameRequested event when the play button gets pressed
+        m_mainMenuUiController.ShowMenu();
+        m_mainMenuUiController.PlayGameClicked += OnPlayGameClicked;
+    }
+
+    private void OnPlayGameClicked()
+    {
+        PlayGameRequested.Invoke();
     }
 
     public void OnExit(string next)
     {
-        // TODO: unsubscribe from menu
+        m_mainMenuUiController.PlayGameClicked -= OnPlayGameClicked;
+        m_mainMenuUiController.HideMenu();
     }
 
     public void OnOverride(string next)
