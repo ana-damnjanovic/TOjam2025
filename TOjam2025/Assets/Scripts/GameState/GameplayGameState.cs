@@ -14,19 +14,23 @@ public class GameplayGameState : IGameState
     private PlayerInput m_playerInput;
     private PlayerInputRelay m_playerInputRelay;
     private Player m_player;
+    private LevelManager m_levelManager;
 
     public GameplayGameState(PlayerInput playerInput, PlayerInputRelay playerInputRelay)
     {
         m_playerInput = playerInput;
         m_playerInputRelay = playerInputRelay;
+        m_levelManager = GameObject.FindFirstObjectByType<LevelManager>();
     }
 
     public void OnEnter(string previous)
     {
-        // TODO: spawn player, set up and start the level
+        // TODO: set up and start the level manager
         // TODO: listen for game over or pause and throw corresponding events 
         m_player = GameObject.FindAnyObjectByType<Player>();
         m_player.SetPlayerInputRelay(m_playerInputRelay);
+
+        m_levelManager.SetUpLevel();
 
         m_playerInput.SwitchCurrentActionMap("Player");
         m_playerInputRelay.PauseActionPerformed += OnPauseRequested;

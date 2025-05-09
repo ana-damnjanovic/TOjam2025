@@ -11,9 +11,21 @@ public class Player : MonoBehaviour
 
     private Vector2 m_movementDirection;
 
+    private bool m_canMove = false;
+
     private void Awake()
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
+    }
+    
+    public void EnableMovement()
+    {
+        m_canMove = true;
+    }
+
+    public void DisableMovement()
+    {
+        m_canMove = false;
     }
 
     public void SetPlayerInputRelay(PlayerInputRelay inputRelay)
@@ -38,7 +50,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_rigidBody.MovePosition((Vector2)transform.position + m_movementDirection * m_speed * Time.deltaTime);
+        if (m_canMove)
+        {
+            m_rigidBody.MovePosition((Vector2)transform.position + m_movementDirection * m_speed * Time.deltaTime);
+        }
     }
 
     private void UnsubscribeFromInputs()
