@@ -11,18 +11,25 @@ public class GameplayGameState : IGameState
 
     public event System.Action PauseRequested = delegate { };
 
-    private PlayerInputController m_playerInputController;
+    private PlayerInput m_playerInput;
+    private PlayerInputRelay m_playerInputRelay;
+    private Player m_player;
+
+    public GameplayGameState(PlayerInput playerInput, PlayerInputRelay playerInputRelay)
+    {
+        m_playerInput = playerInput;
+        m_playerInputRelay = playerInputRelay;
+    }
 
     public void OnEnter(string previous)
     {
         // TODO: spawn player, set up and start the level
         // TODO: listen for game over or pause and throw corresponding events 
+        m_player = GameObject.FindAnyObjectByType<Player>();
+        m_player.SetPlayerInputRelay(m_playerInputRelay);
 
-
-        //TODO: this will come from the spawned player
-        m_playerInputController = GameObject.FindFirstObjectByType<PlayerInputController>();
-        m_playerInputController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        m_playerInputController.PauseActionPerformed += OnPauseRequested;
+        m_playerInput.SwitchCurrentActionMap("Player");
+        m_playerInputRelay.PauseActionPerformed += OnPauseRequested;
         
     }
 
@@ -35,17 +42,17 @@ public class GameplayGameState : IGameState
     {
         // TODO: unsubscribe from player events
 
-        m_playerInputController.PauseActionPerformed -= OnPauseRequested;
+        m_playerInputRelay.PauseActionPerformed -= OnPauseRequested;
     }
 
     public void OnOverride(string next)
     {
-        m_playerInputController.PauseActionPerformed -= OnPauseRequested;
+        m_playerInputRelay.PauseActionPerformed -= OnPauseRequested;
     }
 
     public void OnResume(string previous)
     {
-        m_playerInputController.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        m_playerInputController.PauseActionPerformed += OnPauseRequested;
+        m_playerInputRelay.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        m_playerInputRelay.PauseActionPerformed += OnPauseRequested;
     }
 }
