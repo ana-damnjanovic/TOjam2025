@@ -505,8 +505,8 @@ GameObject:
   m_Component:
   - component: {fileID: 699869120}
   - component: {fileID: 699869121}
-  - component: {fileID: 699869123}
   - component: {fileID: 699869122}
+  - component: {fileID: 699869123}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -599,7 +599,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699869119}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
