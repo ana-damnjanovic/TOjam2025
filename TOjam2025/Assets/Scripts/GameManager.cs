@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private PauseGameState m_pauseState;
     private GameOverGameState m_gameOverGameState;
 
+
     private void Awake()
     {
         m_splashUiController = FindAnyObjectByType<SplashUiController>();

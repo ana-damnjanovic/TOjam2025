@@ -18,6 +18,7 @@ public class GameStateMachine
             IGameState currentState = m_activeStates.Peek();
             currentState.OnOverride(nextState.StateName);
             m_activeStates.Push(nextState);
+            nextState.OnEnter(currentState.StateName);
         }
         else
         {
@@ -31,6 +32,7 @@ public class GameStateMachine
         {
             IGameState previousState = m_activeStates.Pop();
             IGameState currentState = m_activeStates.Peek();
+            previousState.OnExit(currentState.StateName);
             currentState.OnResume(previousState.StateName);
         }
         else

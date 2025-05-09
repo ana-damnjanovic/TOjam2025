@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenuUiController : MonoBehaviour
 {
-    public event System.Action PlayGameClicked = delegate { };
+    public event System.Action PlayGameRequested = delegate { };
 
     [SerializeField]
     private Canvas m_canvas;
@@ -20,7 +20,7 @@ public class MainMenuUiController : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        PlayGameClicked.Invoke();
+        PlayGameRequested.Invoke();
     }
 
     public void HideMenu()

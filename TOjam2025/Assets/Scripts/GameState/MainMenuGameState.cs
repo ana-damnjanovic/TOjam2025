@@ -18,7 +18,7 @@ public class MainMenuGameState : IGameState
     public void OnEnter(string previous)
     {
         m_mainMenuUiController.ShowMenu();
-        m_mainMenuUiController.PlayGameClicked += OnPlayGameClicked;
+        m_mainMenuUiController.PlayGameRequested += OnPlayGameClicked;
     }
 
     private void OnPlayGameClicked()
@@ -28,7 +28,7 @@ public class MainMenuGameState : IGameState
 
     public void OnExit(string next)
     {
-        m_mainMenuUiController.PlayGameClicked -= OnPlayGameClicked;
+        m_mainMenuUiController.PlayGameRequested -= OnPlayGameClicked;
         m_mainMenuUiController.HideMenu();
     }
 

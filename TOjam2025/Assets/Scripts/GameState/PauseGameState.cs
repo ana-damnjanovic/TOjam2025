@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PauseGameState : IGameState
 {
@@ -7,14 +10,31 @@ public class PauseGameState : IGameState
 
     public event System.Action ResumeRequested = delegate { };
 
+    private PauseMenuUiController m_pauseMenuUiController;
+    private PlayerInput m_playerInput;
+
+    public PauseGameState()
+    {
+        m_pauseMenuUiController = GameObject.FindFirstObjectByType<PauseMenuUiController>();
+        m_playerInput = GameObject.FindFirstObjectByType<PlayerInput>();
+    }
+
     public void OnEnter(string previous)
     {
-        // TODO: show pause menu and listen for its button presses
+        m_playerInput.SwitchCurrentActionMap("UI");
+        m_pauseMenuUiController.ResumeGameRequested += OnResumeRequested;
+        m_pauseMenuUiController.ShowMenu();
+    }
+
+    private void OnResumeRequested()
+    {
+        ResumeRequested.Invoke();
     }
 
     public void OnExit(string next)
     {
-        // TODO: unsubscribe from pause menu
+        m_pauseMenuUiController.ResumeGameRequested -= OnResumeRequested;
+        m_pauseMenuUiController.HideMenu();
     }
 
     public void OnOverride(string next)
