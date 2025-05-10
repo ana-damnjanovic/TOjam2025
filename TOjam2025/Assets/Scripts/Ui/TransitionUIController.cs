@@ -37,7 +37,7 @@ public class TransitionUIController : MonoBehaviour
         m_canvas.gameObject.SetActive(true);
         m_canvas.enabled = true;
 
-        m_animator.Play("Transition Animation");
+        m_animator.Play("Transition Anim");
         m_animationStarted = true;
     }
 
