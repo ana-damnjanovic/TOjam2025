@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   m_levelNum: 3
+  m_levelText: Hour 3
   m_levelEffect: {fileID: 0}
   m_foodPrefabs:
   - {fileID: 459214540914289263, guid: 6c4df0fb28078e245a3dbf1f2e5af0e8, type: 3}
