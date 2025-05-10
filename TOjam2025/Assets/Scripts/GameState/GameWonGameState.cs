@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class GameOverGameState : IGameState
+public class GameWonGameState : IGameState
 {
-    private static string STATE_NAME = "GameOverGameState";
+    private static string STATE_NAME = "GameWonGameState";
     public string StateName => STATE_NAME;
 
     public event System.Action RestartGameRequested = delegate { };
 
     public void OnEnter(string previous)
     {
-        // TODO: show game over menu
-        // TODO: clean up, delete player and tell game manager to reset level progress
+        // TODO: show game win menu
+
+        Debug.Log("ALL LEVELS COMPLETED!!");
     }
 
     public void OnExit(string next)
@@ -20,7 +21,7 @@ public class GameOverGameState : IGameState
 
     public void OnOverride(string next)
     {
-        // game over state probably won't have an override
+        // game won state probably won't have an override
     }
 
     public void OnResume(string previous)
