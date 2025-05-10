@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
 
     private GameStateMachine m_gameStateMachine;
     private MainMenuGameState m_mainMenuState;
+    private IntroCutsceneGameState m_introCutsceneState;
     private GameplayGameState m_gameplayState;
     private PauseGameState m_pauseState;
-    private GameOverGameState m_gameOverGameState;
+    private LevelTransitionGameState m_transitionState;
+    private GameWonGameState m_gameWonState;
 
     private PlayerInput m_playerInput;
     private PlayerInputRelay m_playerInputRelay;
@@ -45,22 +47,44 @@ public class GameManager : MonoBehaviour
         m_mainMenuState = new MainMenuGameState();
         m_mainMenuState.PlayGameRequested += OnPlayGameRequested;
 
+        m_introCutsceneState = new IntroCutsceneGameState();
+        m_introCutsceneState.CutsceneFinished += OnIntroCutsceneFinished;
+
         m_gameplayState = new GameplayGameState(m_playerInput, m_playerInputRelay);
-        m_gameplayState.GameOverRequested += OnGameOverRequested;
+        m_gameplayState.GameWonRequested += OnGameWonRequested;
         m_gameplayState.PauseRequested += OnPauseRequested;
+        m_gameplayState.NextLevelRequested += OnNextLevelRequested;
 
         m_pauseState = new PauseGameState(m_playerInput);
         m_pauseState.ResumeRequested += OnResumeRequested;
 
-        m_gameOverGameState = new GameOverGameState();
-        m_gameOverGameState.RestartGameRequested += OnPlayGameRequested;
+        m_transitionState = new LevelTransitionGameState();
+        m_transitionState.LevelTransitionFinished += OnTransitionFinished;
+
+        m_gameWonState = new GameWonGameState();
+        m_gameWonState.RestartGameRequested += OnPlayGameRequested;
 
         m_gameStateMachine.ChangeState(m_mainMenuState);
     }
 
-    private void OnPlayGameRequested()
+    private void OnIntroCutsceneFinished()
     {
         m_gameStateMachine.ChangeState(m_gameplayState);
+    }
+
+    private void OnNextLevelRequested()
+    {
+        m_gameStateMachine.ChangeState(m_transitionState);
+    }
+
+    private void OnTransitionFinished()
+    {
+        m_gameStateMachine.ChangeState(m_gameplayState);
+    }
+
+    private void OnPlayGameRequested()
+    {
+        m_gameStateMachine.ChangeState(m_introCutsceneState);
     }
 
     private void OnResumeRequested()
@@ -73,8 +97,8 @@ public class GameManager : MonoBehaviour
         m_gameStateMachine.OverrideState(m_pauseState);
     }
 
-    private void OnGameOverRequested()
+    private void OnGameWonRequested()
     {
-        m_gameStateMachine.ChangeState(m_gameOverGameState);
+        m_gameStateMachine.ChangeState(m_gameWonState);
     }
 }

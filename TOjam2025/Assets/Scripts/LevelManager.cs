@@ -17,7 +17,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Player m_player;
 
+    [SerializeField]
+    private PlayerGoal m_playerGoal;
+
     private List<GameObject> m_spawnedPrefabs = new();
+
+    public event System.Action LevelSucceeded = delegate { };
+
+    public event System.Action AllLevelsWon = delegate { };
+
+    public void Initialize()
+    {
+        SetUpLevel();
+        AddListeners();
+    }
 
     public void SetUpLevel()
     {
@@ -53,7 +66,7 @@ public class LevelManager : MonoBehaviour
         m_player.EnableMovement();
     }
 
-    public void CleanUpLevel()
+    private void CleanUpLevel()
     {
         for (int iPrefab = 0; iPrefab < m_spawnedPrefabs.Count; ++iPrefab)
         {
@@ -62,4 +75,37 @@ public class LevelManager : MonoBehaviour
         m_spawnedPrefabs.Clear();
     }
 
+
+    private void AddListeners()
+    {
+        m_player.LevelFailed += OnLevelFailed;
+        m_playerGoal.PlayerReachedGoal += OnLevelSucceeded;
+    }
+
+    private void RemoveListeners()
+    {
+        m_player.LevelFailed -= OnLevelFailed;
+        m_playerGoal.PlayerReachedGoal -= OnLevelSucceeded;
+    }
+
+    private void OnLevelSucceeded()
+    {
+        CleanUpLevel();
+        m_currentLevel++;
+        if (m_currentLevel > m_levelData.Count)
+        {
+            AllLevelsWon.Invoke();
+        }
+        else
+        {
+            LevelSucceeded.Invoke();
+        }
+    }
+
+    private void OnLevelFailed()
+    {
+        RemoveListeners();
+        CleanUpLevel();
+        Initialize();
+    }
 }
