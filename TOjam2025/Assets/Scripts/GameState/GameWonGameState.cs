@@ -7,16 +7,21 @@ public class GameWonGameState : IGameState
 
     public event System.Action RestartGameRequested = delegate { };
 
+    private GameWonUiController m_gameWonUiController;
+
+    public GameWonGameState()
+    {
+        m_gameWonUiController = GameObject.FindFirstObjectByType<GameWonUiController>();
+    }
+
     public void OnEnter(string previous)
     {
-        // TODO: show game win menu
-
-        Debug.Log("ALL LEVELS COMPLETED!!");
+        m_gameWonUiController.ShowUi();
     }
 
     public void OnExit(string next)
     {
-        
+        m_gameWonUiController.HideUi();
     }
 
     public void OnOverride(string next)

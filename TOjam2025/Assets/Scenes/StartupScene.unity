@@ -388,6 +388,7 @@ MonoBehaviour:
   m_gameplaySceneName: GameplayScene
   m_pauseMenuSceneName: PauseMenuScene
   m_gameOverMenuSceneName: GameOverMenuScene
+  m_transitionSceneName: TransitionScene
 --- !u!1 &1383074886
 GameObject:
   m_ObjectHideFlags: 0

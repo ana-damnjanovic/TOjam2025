@@ -28,7 +28,7 @@ public class SceneLoader : MonoBehaviour
    
     public void Initialize()
     {
-        m_scenesToLoad = new List<string>() { m_mainMenuSceneName, m_gameplaySceneName, m_pauseMenuSceneName, m_gameOverMenuSceneName };
+        m_scenesToLoad = new List<string>() { m_mainMenuSceneName, m_gameplaySceneName, m_pauseMenuSceneName, m_gameOverMenuSceneName, m_transitionSceneName };
         m_numLoaded = 0;
 
         AsyncOperation mainMenuSceneLoadOperation = SceneManager.LoadSceneAsync(m_mainMenuSceneName, LoadSceneMode.Additive);
@@ -38,6 +38,10 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation gameplaySceneLoadOperation = SceneManager.LoadSceneAsync(m_gameplaySceneName, LoadSceneMode.Additive);
         gameplaySceneLoadOperation.allowSceneActivation = false;
         gameplaySceneLoadOperation.completed += OnSceneLoaded;
+
+        AsyncOperation transitionSceneLoadOperation = SceneManager.LoadSceneAsync(m_transitionSceneName, LoadSceneMode.Additive);
+        transitionSceneLoadOperation.allowSceneActivation = false;
+        transitionSceneLoadOperation.completed += OnSceneLoaded;
 
         AsyncOperation pauseMenuLoadOperation = SceneManager.LoadSceneAsync(m_pauseMenuSceneName, LoadSceneMode.Additive);
         pauseMenuLoadOperation.allowSceneActivation = false;
@@ -53,11 +57,6 @@ public class SceneLoader : MonoBehaviour
         sceneLoadOperation.completed -= OnSceneLoaded;
         m_numLoaded++;
         CheckIfAllScenesLoaded();
-    }
-
-    public void LoadTransitionScene()
-    {
-        SceneManager.LoadScene(m_transitionSceneName); 
     }
 
     private void CheckIfAllScenesLoaded()

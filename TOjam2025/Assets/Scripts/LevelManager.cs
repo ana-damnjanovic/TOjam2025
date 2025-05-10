@@ -119,6 +119,8 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("TotalLevels", m_levelData.Count);
         PlayerPrefs.Save();
 
+        RemoveListeners();
+
         if (m_currentLevel > m_levelData.Count)
         {
             AllLevelsWon.Invoke();
@@ -126,7 +128,6 @@ public class LevelManager : MonoBehaviour
         else
         {
             LevelSucceeded.Invoke();
-            m_sceneLoader.LoadTransitionScene();
         }
     }
 
