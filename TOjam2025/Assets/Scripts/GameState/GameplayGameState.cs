@@ -7,9 +7,13 @@ public class GameplayGameState : IGameState
     private static string STATE_NAME = "GameplayGameState";
     public string StateName => STATE_NAME;
 
-    public event System.Action GameOverRequested = delegate { };
+    public int LevelTransitionRequested { get; internal set; }
+
+    public event System.Action GameWonRequested = delegate { };
 
     public event System.Action PauseRequested = delegate { };
+
+    public event System.Action NextLevelRequested = delegate { };
 
     private PlayerInput m_playerInput;
     private PlayerInputRelay m_playerInputRelay;
@@ -21,20 +25,41 @@ public class GameplayGameState : IGameState
         m_playerInput = playerInput;
         m_playerInputRelay = playerInputRelay;
         m_levelManager = GameObject.FindFirstObjectByType<LevelManager>();
+        m_player = GameObject.FindAnyObjectByType<Player>();
+        m_player.SetPlayerInputRelay(m_playerInputRelay);
     }
 
     public void OnEnter(string previous)
     {
-        // TODO: set up and start the level manager
-        // TODO: listen for game over or pause and throw corresponding events 
-        m_player = GameObject.FindAnyObjectByType<Player>();
-        m_player.SetPlayerInputRelay(m_playerInputRelay);
-
-        m_levelManager.SetUpLevel();
+        m_levelManager.Initialize();
 
         m_playerInput.SwitchCurrentActionMap("Player");
+
+        AddListeners();
+    }
+
+    private void AddListeners()
+    {
+        m_levelManager.LevelSucceeded += OnLevelSucceeded;
+        m_levelManager.AllLevelsWon += OnAllLevelsWon;
         m_playerInputRelay.PauseActionPerformed += OnPauseRequested;
-        
+    }
+
+    private void OnAllLevelsWon()
+    {
+        GameWonRequested.Invoke();
+    }
+
+    private void RemoveListeners()
+    {
+        m_levelManager.LevelSucceeded -= OnLevelSucceeded;
+        m_levelManager.AllLevelsWon -= OnAllLevelsWon;
+        m_playerInputRelay.PauseActionPerformed -= OnPauseRequested;
+    }
+
+    private void OnLevelSucceeded()
+    {
+        NextLevelRequested.Invoke();
     }
 
     private void OnPauseRequested()
@@ -44,19 +69,17 @@ public class GameplayGameState : IGameState
 
     public void OnExit(string next)
     {
-        // TODO: unsubscribe from player events
-
-        m_playerInputRelay.PauseActionPerformed -= OnPauseRequested;
+        RemoveListeners();
     }
 
     public void OnOverride(string next)
     {
-        m_playerInputRelay.PauseActionPerformed -= OnPauseRequested;
+        RemoveListeners();
     }
 
     public void OnResume(string previous)
     {
         m_playerInputRelay.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        m_playerInputRelay.PauseActionPerformed += OnPauseRequested;
+        AddListeners();
     }
 }
