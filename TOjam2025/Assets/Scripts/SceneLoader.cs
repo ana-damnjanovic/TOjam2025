@@ -17,6 +17,9 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private string m_gameOverMenuSceneName;
 
+    [SerializeField]
+    private string m_transitionSceneName;
+
     public event System.Action SceneLoadCompleted = delegate { };
 
     private List<string> m_scenesToLoad;
@@ -50,6 +53,11 @@ public class SceneLoader : MonoBehaviour
         sceneLoadOperation.completed -= OnSceneLoaded;
         m_numLoaded++;
         CheckIfAllScenesLoaded();
+    }
+
+    public void LoadTransitionScene()
+    {
+        SceneManager.LoadScene(m_transitionSceneName); 
     }
 
     private void CheckIfAllScenesLoaded()
