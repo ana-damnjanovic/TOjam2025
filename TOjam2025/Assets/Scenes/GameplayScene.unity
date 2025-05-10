@@ -584,7 +584,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.8, y: 0.23}
+  m_Size: {x: 2.45, y: 0.23}
   m_EdgeRadius: 0
 --- !u!1 &699869119
 GameObject:
@@ -1318,6 +1318,9 @@ MonoBehaviour:
   m_levelData:
   - {fileID: 11400000, guid: 1e346df379280ca45b67479300e1a773, type: 2}
   - {fileID: 11400000, guid: 1957174e0bc490c47bace2de40a195c6, type: 2}
+  - {fileID: 11400000, guid: 42df79ca6a1bc75438d29754a112d0c9, type: 2}
+  - {fileID: 11400000, guid: 4ac1bd0f77421e04593fd1c3a0bea5f4, type: 2}
+  - {fileID: 11400000, guid: 2437c80fd6c64664b87e61bc86e3a06f, type: 2}
   m_playerStartPosition: {fileID: 2078562530}
   m_foodSpawnPositions:
   - {fileID: 156027081}
@@ -1423,6 +1426,7 @@ GameObject:
   - component: {fileID: 1668074723}
   - component: {fileID: 1668074724}
   - component: {fileID: 1668074725}
+  - component: {fileID: 1668074726}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -1468,7 +1472,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1522,6 +1526,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1668074726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668074722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e1961481fb0a545aa2ac4f820c133c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_spriteJitterMaterial: {fileID: 2100000, guid: cdb2d8b11750cf845b11e6d07994a959, type: 2}
+  m_spriteRenderer: {fileID: 1668074724}
 --- !u!1 &1980809415
 GameObject:
   m_ObjectHideFlags: 0
