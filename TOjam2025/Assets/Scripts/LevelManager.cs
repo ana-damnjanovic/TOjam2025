@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
 
     private List<GameObject> m_spawnedPrefabs = new();
 
+    private List<Effect> m_activeLevelEffects = new();
+
     public event System.Action LevelSucceeded = delegate { };
 
     public event System.Action AllLevelsWon = delegate { };
@@ -63,7 +65,24 @@ public class LevelManager : MonoBehaviour
             spawnIndex++;
         }
 
+        Effect levelEffect = currentLevelData.GetLevelEffect;
+        if (null != levelEffect)
+        {
+            levelEffect.Apply();
+            m_activeLevelEffects.Add(levelEffect);
+        }
+
         m_player.EnableMovement();
+    }
+
+    public void Reset()
+    {
+        CleanUpLevel();
+        for (int iEffect = 0; iEffect < m_activeLevelEffects.Count; ++iEffect)
+        {
+            m_activeLevelEffects[iEffect].Remove();
+        }
+        m_activeLevelEffects.Clear();
     }
 
     private void CleanUpLevel()
