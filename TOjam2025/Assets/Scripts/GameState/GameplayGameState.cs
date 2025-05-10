@@ -38,6 +38,11 @@ public class GameplayGameState : IGameState
         AddListeners();
     }
 
+    public void ResetLevels()
+    {
+        m_levelManager.Reset();
+    }
+
     private void AddListeners()
     {
         m_levelManager.LevelSucceeded += OnLevelSucceeded;

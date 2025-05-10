@@ -62,9 +62,15 @@ public class GameManager : MonoBehaviour
         m_transitionState.LevelTransitionFinished += OnTransitionFinished;
 
         m_gameWonState = new GameWonGameState();
-        m_gameWonState.RestartGameRequested += OnPlayGameRequested;
+        m_gameWonState.RestartGameRequested += OnRestartGameRequested;
 
         m_gameStateMachine.ChangeState(m_mainMenuState);
+    }
+
+    private void OnRestartGameRequested()
+    {
+        m_gameplayState.ResetLevels();
+        m_gameStateMachine.ChangeState(m_gameplayState);
     }
 
     private void OnIntroCutsceneFinished()
