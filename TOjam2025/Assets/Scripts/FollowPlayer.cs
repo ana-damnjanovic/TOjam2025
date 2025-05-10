@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+    //camera restriction
+    public Vector2 minPosition;
+    public Vector2 maxPosition;
+
     private GameObject m_player;
     private Vector3 m_offset;
     private float smoothTime = 0.25f;
@@ -19,6 +23,11 @@ public class FollowPlayer : MonoBehaviour
         {
             Vector3 targetPosition = m_player.transform.position + m_offset;
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+            float clampedX = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
+            float clampedY = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
+
+            transform.position = new Vector3(clampedX, clampedY, targetPosition.z);
         }
     }
 }
