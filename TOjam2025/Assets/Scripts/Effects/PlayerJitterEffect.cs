@@ -4,14 +4,14 @@ using UnityEngine;
 public class PlayerJitterEffect : Effect
 {
     [SerializeField]
-    private float m_jitterMin;
+    private float m_playerJitterMin;
 
     [SerializeField]
-    private float m_jitterMax;
+    private float m_playerJitterMax;
 
     public override void Apply()
     {
-        GameObject.FindFirstObjectByType<Player>().EnableJitter(m_jitterMin, m_jitterMax);
+        GameObject.FindFirstObjectByType<Player>().EnableJitter(m_playerJitterMin, m_playerJitterMax);
     }
 
     public override void Remove()

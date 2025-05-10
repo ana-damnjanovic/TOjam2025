@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private bool m_isJittering = false;
     private float m_jitterMin;
     private float m_jitterMax;
+    private SpriteJitter m_spriteJitter;
 
     public event System.Action LevelFailed = delegate { };
 
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_currentSpeed = m_baseSpeed;
+        m_spriteJitter = GetComponentInChildren<SpriteJitter>();
     }
     
     public void EnableMovement()
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
         m_isJittering = true;
         m_jitterMin = min;
         m_jitterMax = max;
+        m_spriteJitter.StartJitter();
     }
 
     public void DisableJitter()
@@ -67,6 +70,7 @@ public class Player : MonoBehaviour
         m_isJittering = false;
         m_jitterMin = 0f;
         m_jitterMax = 0f;
+        m_spriteJitter.StopJitter();
     }
 
     public void SetPlayerInputRelay(PlayerInputRelay inputRelay)
@@ -116,7 +120,7 @@ public class Player : MonoBehaviour
                 //float xJitter = 0.01f;
                 float xJitter = UnityEngine.Random.Range(m_jitterMin, m_jitterMax) * RandomSign();
                 //float yJitter = UnityEngine.Random.Range(m_jitterMin, m_jitterMax) * RandomSign();
-                float yJitter = 0.01f;
+                float yJitter = 0.01f * RandomSign();
                 Vector2 jitterOffset = new Vector2(xJitter, yJitter);
                 m_rigidBody.MovePosition((Vector2)transform.position + jitterOffset + m_movementDirection * m_currentSpeed * Time.deltaTime);
             }

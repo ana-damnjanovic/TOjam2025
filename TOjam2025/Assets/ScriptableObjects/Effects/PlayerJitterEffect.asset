@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca057e00c201ae740b7429bbe625f0ae, type: 3}
   m_Name: PlayerJitterEffect
   m_EditorClassIdentifier: 
-  m_jitterMin: 0.01
-  m_jitterMax: 0.05
+  m_playerJitterMin: 0.01
+  m_playerJitterMax: 0.015
+  m_spriteJitterMin: 0.5
+  m_spriteJitterMax: 1
