@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private PlayerGoal m_playerGoal;
 
+    [SerializeField]
+    private SceneLoader m_sceneLoader;
+
     private List<GameObject> m_spawnedPrefabs = new();
 
     private List<Effect> m_activeLevelEffects = new();
@@ -111,6 +114,11 @@ public class LevelManager : MonoBehaviour
     {
         CleanUpLevel();
         m_currentLevel++;
+
+        PlayerPrefs.SetInt("CurrentLevel", m_currentLevel - 1);
+        PlayerPrefs.SetInt("TotalLevels", m_levelData.Count);
+        PlayerPrefs.Save();
+
         if (m_currentLevel > m_levelData.Count)
         {
             AllLevelsWon.Invoke();
@@ -118,6 +126,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             LevelSucceeded.Invoke();
+            m_sceneLoader.LoadTransitionScene();
         }
     }
 
