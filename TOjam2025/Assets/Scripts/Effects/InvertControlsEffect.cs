@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "InvertControlsEffect", menuName = "ScriptableObjects/Effects/InvertControlsEffect")]
 public class InvertControlsEffect : Effect
 {
     public override void Apply()
