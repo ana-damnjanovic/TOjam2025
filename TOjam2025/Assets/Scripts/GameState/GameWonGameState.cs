@@ -8,14 +8,21 @@ public class GameWonGameState : IGameState
     public event System.Action RestartGameRequested = delegate { };
 
     private GameWonUiController m_gameWonUiController;
+    private MinimapController m_minimapController;
 
     public GameWonGameState()
     {
         m_gameWonUiController = GameObject.FindFirstObjectByType<GameWonUiController>();
+
+        m_minimapController = GameObject.FindFirstObjectByType<MinimapController>();
     }
 
     public void OnEnter(string previous)
     {
+        // Hack to shut minimap off so the game over win screen can display
+        m_minimapController.DisableMinimap();
+        m_minimapController.StopBounce();
+
         m_gameWonUiController.ShowUi();
     }
 
