@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
     public int GetCurrentLevel => m_currentLevel;
     public int GetMaxLevel => m_levelData.Count;
 
-    public string GetLevelText => m_levelData[m_currentLevel].GetLevelText;
+    public string GetLevelText => m_levelData[m_currentLevel-1].GetLevelText;
 
     public void Initialize()
     {
@@ -120,7 +120,7 @@ public class LevelManager : MonoBehaviour
 
     private GameObject PickRandomEnemyPrefab()
     {
-        int prefabIndex = Random.Range(0, m_enemyPrefabs.Count-1);
+        int prefabIndex = Random.Range(0, m_enemyPrefabs.Count);
         return m_enemyPrefabs[prefabIndex];
     }
 
