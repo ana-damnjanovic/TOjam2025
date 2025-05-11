@@ -22,18 +22,16 @@ public class TransitionUIController : MonoBehaviour
 
     private void Start()
     {
-        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
-        int totalLevels = PlayerPrefs.GetInt("TotalLevels", 8); 
 
-        int nextLevel = currentLevel + 1;
-        int remainingLevels = Mathf.Max(0, totalLevels - currentLevel);
-
-        nextLevelText.text = nextLevel.ToString();
-        remainingLevelsText.text = remainingLevels.ToString();
     }
 
-    public void ShowUi()
+    public void ShowUi(int level, int maxLevel)
     {
+        int remainingLevels = Mathf.Max(0, maxLevel - level);
+
+        nextLevelText.text = level.ToString();
+        remainingLevelsText.text = remainingLevels.ToString();
+
         m_canvas.gameObject.SetActive(true);
         m_canvas.enabled = true;
 
