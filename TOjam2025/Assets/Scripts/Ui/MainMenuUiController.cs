@@ -20,6 +20,7 @@ public class MainMenuUiController : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
+        // enable animation panel and wait for it to finish
         PlayGameRequested.Invoke();
     }
 
