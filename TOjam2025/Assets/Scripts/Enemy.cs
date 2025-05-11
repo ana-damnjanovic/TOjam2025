@@ -27,32 +27,17 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // bounce in the opposite direction of the hit
-        Vector2 bounceDirection = (this.transform.position - collision.gameObject.transform.position).normalized;
+        ContactPoint2D contactPoint = collision.GetContact(0);
+        
+        // bounce in the opposite direction of the collision point
+        Vector2 bounceDirection = new Vector2(transform.position.x - contactPoint.point.x, transform.position.y - contactPoint.point.y).normalized;
 
-        //if (collision.gameObject.CompareTag("Wall"))
-        //{
-        //    Vector2 wallNormal = collision.GetContact(0).normal;
-        //    if (wallNormal.x != 0)
-        //    {
-        //        // left or right wall
-        //        m_movementDirection = new Vector2(-m_movementDirection.x, m_movementDirection.y);
-        //    }
-        //    else
-        //    {
-        //        m_movementDirection = new Vector2(m_movementDirection.x, -m_movementDirection.y);
-        //    }
-        //}
         if (collision.gameObject.CompareTag("Player")){
             m_audioSource.PlayOneShot(m_ouchSound);
-            collision.gameObject.GetComponent<Player>().ApplyBounce(-m_movementDirection);
-            m_movementDirection = bounceDirection;
-        }
-        else
-        {
-            m_movementDirection = bounceDirection;
+            collision.gameObject.GetComponent<Player>().ApplyBounce(-bounceDirection);
         }
 
+        m_movementDirection = bounceDirection;
         AdjustSpriteDirection();
     }
 
