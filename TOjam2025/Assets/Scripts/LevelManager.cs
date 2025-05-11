@@ -120,7 +120,7 @@ public class LevelManager : MonoBehaviour
 
     private GameObject PickRandomEnemyPrefab()
     {
-        int prefabIndex = Random.Range(0, m_enemyPrefabs.Count-1);
+        int prefabIndex = Random.Range(0, m_enemyPrefabs.Count);
         return m_enemyPrefabs[prefabIndex];
     }
 
