@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private FallDetector m_fallDetector;
 
+    [SerializeField]
+    private LayerMask m_raycastLayerMask;
+
     private Vector2 m_movementDirection;
 
     private bool m_canMove = false;
@@ -150,6 +153,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckWallCollisions();
         if (m_canMove)
         {
             if (m_isJittering)
@@ -177,6 +181,23 @@ public class Player : MonoBehaviour
                 m_rigidBody.linearVelocity = Vector2.zero;
                 m_rigidBody.angularVelocity = 0f;
                 m_canMove = true;
+            }
+        }
+    }
+
+    private void CheckWallCollisions()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, m_movementDirection, 0.5f, m_raycastLayerMask);
+        if (null != hit.collider && hit.collider.gameObject.CompareTag("Wall"))
+        {
+            string wallName = hit.collider.gameObject.name;
+            if (wallName == "LeftWall" || wallName == "RightWall")
+            {
+                m_movementDirection = new Vector2(0f, m_movementDirection.y);
+            }
+            else if (wallName == "TopWall" || wallName == "BottomWall")
+            {
+                m_movementDirection = new Vector2(m_movementDirection.x, 0f);
             }
         }
     }
