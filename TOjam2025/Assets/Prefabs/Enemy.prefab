@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ouchSound: {fileID: 8300000, guid: ee2e203e601d41e438c896c2923e4542, type: 3}
   m_audioSource: {fileID: 1253914640448606194}
-  m_movementSpeed: 10
+  m_movementSpeed: 20
   m_rigidBody: {fileID: 3609940275979415670}
 --- !u!82 &1253914640448606194
 AudioSource:

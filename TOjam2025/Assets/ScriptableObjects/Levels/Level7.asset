@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level7
   m_EditorClassIdentifier: 
   m_levelNum: 7
-  m_levelText: 
+  m_levelText: OH GOD WHAT IS HAPPENING TO ME
   m_levelEffect: {fileID: 11400000, guid: 98e03d45eb6c26741955d9dac8a4c515, type: 2}
   m_numEnemies: 5
   m_foodPrefabs:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level8
   m_EditorClassIdentifier: 
   m_levelNum: 8
-  m_levelText: 
+  m_levelText: The end is nigh
   m_levelEffect: {fileID: 11400000, guid: c8d5bac1c18495c478c309f7df4da4e8, type: 2}
   m_numEnemies: 5
   m_foodPrefabs:
