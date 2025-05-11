@@ -14,7 +14,7 @@ public class FallDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Food"))
         {
-            //m_audioSource.PlayOneShot(m_fallSound);
+            m_audioSource.PlayOneShot(m_fallSound);
             FallDetected.Invoke();
         }
     }

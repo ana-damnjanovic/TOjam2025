@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c5c89f143db6b47a3fb1a3d706444f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fallSound: {fileID: 0}
+  m_fallSound: {fileID: 8300000, guid: 5956fb021acbd4544b09131d0507175c, type: 3}
   m_audioSource: {fileID: 699869124}
 --- !u!1 &221557890
 GameObject:
