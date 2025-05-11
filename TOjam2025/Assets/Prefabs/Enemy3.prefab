@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2893258913143723551, guid: 1b793be3c63c3724a8f0b865445e874a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d71312ce663c6df42aa42dadfbe92638, type: 2}
+    - target: {fileID: 5392677681210411138, guid: 1b793be3c63c3724a8f0b865445e874a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6592694144364233495, guid: f524d828dea1ece48922f59b7ed8333f, type: 3}
     - target: {fileID: 6298717854078050999, guid: 1b793be3c63c3724a8f0b865445e874a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576347804817764357, guid: 1b793be3c63c3724a8f0b865445e874a, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
