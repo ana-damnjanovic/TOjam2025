@@ -12,6 +12,9 @@ public class SceneLoader : MonoBehaviour
     private string m_gameplaySceneName;
 
     [SerializeField]
+    private string m_cutsceneSceneName;
+
+    [SerializeField]
     private string m_pauseMenuSceneName;
 
     [SerializeField]
@@ -28,7 +31,8 @@ public class SceneLoader : MonoBehaviour
    
     public void Initialize()
     {
-        m_scenesToLoad = new List<string>() { m_mainMenuSceneName, m_gameplaySceneName, m_pauseMenuSceneName, m_gameOverMenuSceneName, m_transitionSceneName };
+        m_scenesToLoad = new List<string>() { m_mainMenuSceneName, m_gameplaySceneName, m_pauseMenuSceneName,
+            m_gameOverMenuSceneName, m_transitionSceneName, m_cutsceneSceneName };
         m_numLoaded = 0;
 
         AsyncOperation mainMenuSceneLoadOperation = SceneManager.LoadSceneAsync(m_mainMenuSceneName, LoadSceneMode.Additive);
@@ -42,6 +46,10 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation transitionSceneLoadOperation = SceneManager.LoadSceneAsync(m_transitionSceneName, LoadSceneMode.Additive);
         transitionSceneLoadOperation.allowSceneActivation = false;
         transitionSceneLoadOperation.completed += OnSceneLoaded;
+
+        AsyncOperation cutsceneSceneLoadOperation = SceneManager.LoadSceneAsync(m_cutsceneSceneName, LoadSceneMode.Additive);
+        cutsceneSceneLoadOperation.allowSceneActivation = false;
+        cutsceneSceneLoadOperation.completed += OnSceneLoaded;
 
         AsyncOperation pauseMenuLoadOperation = SceneManager.LoadSceneAsync(m_pauseMenuSceneName, LoadSceneMode.Additive);
         pauseMenuLoadOperation.allowSceneActivation = false;
