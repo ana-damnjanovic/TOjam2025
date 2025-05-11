@@ -28,13 +28,32 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // bounce in the opposite direction of the hit
-        m_movementDirection = (this.transform.position - collision.gameObject.transform.position).normalized;
-        AdjustSpriteDirection();
+        Vector2 bounceDirection = (this.transform.position - collision.gameObject.transform.position).normalized;
 
+        //if (collision.gameObject.CompareTag("Wall"))
+        //{
+        //    Vector2 wallNormal = collision.GetContact(0).normal;
+        //    if (wallNormal.x != 0)
+        //    {
+        //        // left or right wall
+        //        m_movementDirection = new Vector2(-m_movementDirection.x, m_movementDirection.y);
+        //    }
+        //    else
+        //    {
+        //        m_movementDirection = new Vector2(m_movementDirection.x, -m_movementDirection.y);
+        //    }
+        //}
         if (collision.gameObject.CompareTag("Player")){
             m_audioSource.PlayOneShot(m_ouchSound);
             collision.gameObject.GetComponent<Player>().ApplyBounce(-m_movementDirection);
+            m_movementDirection = bounceDirection;
         }
+        else
+        {
+            m_movementDirection = bounceDirection;
+        }
+
+        AdjustSpriteDirection();
     }
 
     private void AdjustSpriteDirection()
@@ -44,7 +63,7 @@ public class Enemy : MonoBehaviour
             // all our enemy sprites face left by default, we need to flip it
             m_spriteRenderer.flipX = true;
         }
-        else
+        else if (m_movementDirection.x < 0)
         {
             m_spriteRenderer.flipX = false;
         }

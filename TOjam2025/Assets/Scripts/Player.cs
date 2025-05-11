@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private float m_jitterMin;
     private float m_jitterMax;
     private SpriteJitter m_spriteJitter;
+    private SpriteRenderer m_spriteRenderer;
 
     private bool m_isBouncing = false;
     // time during which player can't move and is forced to bounce in the collision direction
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_currentSpeed = m_baseSpeed;
         m_spriteJitter = GetComponentInChildren<SpriteJitter>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     
     public void EnableMovement()
@@ -129,6 +131,20 @@ public class Player : MonoBehaviour
             {
                 m_movementDirection = direction;
             }
+            AdjustSpriteDirection();
+        }
+    }
+
+    private void AdjustSpriteDirection()
+    {
+        if (m_movementDirection.x < 0)
+        {
+            // our enemy sprites faces right by default, we need to flip it
+            m_spriteRenderer.flipX = true;
+        }
+        else if (m_movementDirection.x > 0)
+        {
+            m_spriteRenderer.flipX = false;
         }
     }
 
