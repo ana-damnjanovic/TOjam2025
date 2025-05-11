@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask m_raycastLayerMask;
 
+    [SerializeField]
+    private Canvas m_lightMaskCanvas;
+
     private Vector2 m_movementDirection;
 
     private bool m_canMove = false;
@@ -87,6 +90,16 @@ public class Player : MonoBehaviour
         m_jitterMax = 0f;
         m_spriteJitter.StopJitter();
     }
+    public void EnableLightMask()
+    {
+        m_lightMaskCanvas.enabled = true;
+    }
+
+    public void DisableLightMask()
+    {
+        m_lightMaskCanvas.enabled = false;
+    }
+
 
     public void SetPlayerInputRelay(PlayerInputRelay inputRelay)
     {
