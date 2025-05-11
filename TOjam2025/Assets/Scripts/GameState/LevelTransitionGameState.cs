@@ -20,7 +20,7 @@ public class LevelTransitionGameState : IGameState
 
     public void OnEnter(string previous)
     {
-        m_transitionUiController.ShowUi(m_levelManager.GetCurrentLevel, m_levelManager.GetMaxLevel);
+        m_transitionUiController.ShowUi(m_levelManager.GetCurrentLevel, m_levelManager.GetMaxLevel, m_levelManager.GetLevelText);
         m_transitionUiController.TransitionFinished += OnTransitionFinished;
     }
 
