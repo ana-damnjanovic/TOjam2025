@@ -36,6 +36,9 @@ public class LevelManager : MonoBehaviour
 
     public event System.Action AllLevelsWon = delegate { };
 
+    public int GetCurrentLevel => m_currentLevel;
+    public int GetMaxLevel => m_levelData.Count;
+
     public void Initialize()
     {
         SetUpLevel();
@@ -149,10 +152,6 @@ public class LevelManager : MonoBehaviour
     {
         CleanUpLevel();
         m_currentLevel++;
-
-        PlayerPrefs.SetInt("CurrentLevel", m_currentLevel - 1);
-        PlayerPrefs.SetInt("TotalLevels", m_levelData.Count);
-        PlayerPrefs.Save();
 
         RemoveListeners();
 
