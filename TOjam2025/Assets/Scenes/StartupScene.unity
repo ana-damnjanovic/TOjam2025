@@ -485,6 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mainMenuSceneName: MainMenuScene
   m_gameplaySceneName: GameplayScene
+  m_cutsceneSceneName: Cutscene
   m_pauseMenuSceneName: PauseMenuScene
   m_gameOverMenuSceneName: GameOverMenuScene
   m_transitionSceneName: TransitionScene
