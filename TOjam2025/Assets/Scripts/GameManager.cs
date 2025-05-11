@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     private PlayerInput m_playerInput;
     private PlayerInputRelay m_playerInputRelay;
 
+    private bool m_sceneLoadCompleted = false;
+    private bool m_splashAnimationFinished = false;
+
     private void Awake()
     {
         m_splashUiController = FindAnyObjectByType<SplashUiController>();
@@ -29,15 +32,31 @@ public class GameManager : MonoBehaviour
         m_sceneLoader.SceneLoadCompleted += OnSceneLoadCompleted;
         m_sceneLoader.Initialize();
 
+        m_splashUiController.SplashAnimationFinished += OnSplashAnimationFinished;
         m_splashUiController.ShowSplash();
+    }
+
+    private void OnSplashAnimationFinished()
+    {
+        m_splashAnimationFinished = true;
+        m_splashUiController.SplashAnimationFinished -= OnSplashAnimationFinished;
+        m_splashUiController.HideSplash();
+
+        if (m_sceneLoadCompleted)
+        {
+            InitializeGameStates();
+        }
     }
 
     private void OnSceneLoadCompleted()
     {
+        m_sceneLoadCompleted = true;
         m_sceneLoader.SceneLoadCompleted -= OnSceneLoadCompleted;
 
-        m_splashUiController.HideSplash();
-        InitializeGameStates();
+        if (m_splashAnimationFinished)
+        {
+            InitializeGameStates();
+        }
     }
 
     private void InitializeGameStates()
