@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
     {
         if (m_movementDirection.x < 0)
         {
-            // our enemy sprites faces right by default, we need to flip it
+            // our player sprite faces right by default, we need to flip it
             m_spriteRenderer.flipX = true;
         }
         else if (m_movementDirection.x > 0)
