@@ -15,15 +15,20 @@ public class LevelManager : MonoBehaviour
     private List<Transform> m_foodSpawnPositions;
 
     [SerializeField]
+    private List<Transform> m_enemySpawnPositions;
+
+    [SerializeField]
     private Player m_player;
 
     [SerializeField]
     private PlayerGoal m_playerGoal;
 
     [SerializeField]
-    private SceneLoader m_sceneLoader;
+    private List<GameObject> m_enemyPrefabs;
 
-    private List<GameObject> m_spawnedPrefabs = new();
+    private List<GameObject> m_spawnedFoodPrefabs = new();
+
+    private List<GameObject> m_spawnedEnemyPrefabs = new ();
 
     private List<Effect> m_activeLevelEffects = new();
 
@@ -42,16 +47,17 @@ public class LevelManager : MonoBehaviour
         m_player.DisableMovement();
         m_player.transform.position = m_playerStartPosition.position;
 
+        // spawn food
         Level currentLevelData = m_levelData[m_currentLevel - 1];
         List<GameObject> foodPrefabs = currentLevelData.GetFoodPrefabs;
-        int numPrefabs = foodPrefabs.Count;
-        int numSpawned = 0;
+        int numFoodPrefabs = foodPrefabs.Count;
+        int numFoodItemsSpawned = 0;
         int spawnIndex = 0;
         List<Transform> foodPositionOptions = new List<Transform>(m_foodSpawnPositions);
-        while (numSpawned < numPrefabs)
+        while (numFoodItemsSpawned < numFoodPrefabs)
         {
             Transform nextSpawnPos;
-            if (numPrefabs - numSpawned < foodPositionOptions.Count)
+            if (numFoodPrefabs - numFoodItemsSpawned < foodPositionOptions.Count)
             {
                 int randomPosIndex = Random.Range(0, foodPositionOptions.Count - 1);
                 nextSpawnPos = foodPositionOptions[randomPosIndex];
@@ -63,11 +69,30 @@ public class LevelManager : MonoBehaviour
                 foodPositionOptions.RemoveAt(0);
             }
             GameObject prefab = GameObject.Instantiate(foodPrefabs[spawnIndex], nextSpawnPos);
-            m_spawnedPrefabs.Add(prefab);
-            numSpawned++;
+            m_spawnedFoodPrefabs.Add(prefab);
+            numFoodItemsSpawned++;
             spawnIndex++;
         }
 
+        // spawn enemies
+        int numEnemiesRequired = currentLevelData.GetNumEnemies;
+        int numEnemiesSpawned = 0;
+        List<Transform> enemyPositionOptions = new List<Transform>(m_enemySpawnPositions);
+        while (numEnemiesSpawned < numEnemiesRequired && enemyPositionOptions.Count > 0)
+        {
+            int randomPosIndex = Random.Range(0, enemyPositionOptions.Count - 1);
+            Transform spawnPos = enemyPositionOptions[randomPosIndex];
+            enemyPositionOptions.RemoveAt(randomPosIndex);
+
+            GameObject prefab = PickRandomEnemyPrefab();
+            GameObject spawnedEnemy = GameObject.Instantiate(prefab, spawnPos);
+            m_spawnedEnemyPrefabs.Add(spawnedEnemy);
+            numEnemiesSpawned++;
+            spawnIndex++;
+        }
+
+
+        // apply level effects
         Effect levelEffect = currentLevelData.GetLevelEffect;
         if (null != levelEffect)
         {
@@ -88,13 +113,23 @@ public class LevelManager : MonoBehaviour
         m_activeLevelEffects.Clear();
     }
 
+    private GameObject PickRandomEnemyPrefab()
+    {
+        int prefabIndex = Random.Range(0, m_enemyPrefabs.Count-1);
+        return m_enemyPrefabs[prefabIndex];
+    }
+
     private void CleanUpLevel()
     {
-        for (int iPrefab = 0; iPrefab < m_spawnedPrefabs.Count; ++iPrefab)
+        for (int iFoodPrefab = 0; iFoodPrefab < m_spawnedFoodPrefabs.Count; ++iFoodPrefab)
         {
-            Destroy(m_spawnedPrefabs[iPrefab]);
+            Destroy(m_spawnedFoodPrefabs[iFoodPrefab]);
         }
-        m_spawnedPrefabs.Clear();
+        for (int iEnemyPrefab = 0; iEnemyPrefab < m_spawnedEnemyPrefabs.Count; ++iEnemyPrefab)
+        {
+            Destroy(m_spawnedEnemyPrefabs[iEnemyPrefab]);
+        }
+        m_spawnedFoodPrefabs.Clear();
     }
 
 
