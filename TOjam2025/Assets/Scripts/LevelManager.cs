@@ -116,6 +116,7 @@ public class LevelManager : MonoBehaviour
             m_activeLevelEffects[iEffect].Remove();
         }
         m_activeLevelEffects.Clear();
+        m_currentLevel = 1;
     }
 
     private GameObject PickRandomEnemyPrefab()

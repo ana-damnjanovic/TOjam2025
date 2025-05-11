@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameWonGameState : IGameState
@@ -5,10 +6,11 @@ public class GameWonGameState : IGameState
     private static string STATE_NAME = "GameWonGameState";
     public string StateName => STATE_NAME;
 
-    public event System.Action RestartGameRequested = delegate { };
+    public event System.Action MainMenuRequested = delegate { };
 
     private GameWonUiController m_gameWonUiController;
     private MinimapController m_minimapController;
+
 
     public GameWonGameState()
     {
@@ -23,7 +25,14 @@ public class GameWonGameState : IGameState
         m_minimapController.DisableMinimap();
         m_minimapController.StopBounce();
 
+        m_gameWonUiController.MainMenuRequested += OnMainMenuRequested;
         m_gameWonUiController.ShowUi();
+    }
+
+    private void OnMainMenuRequested()
+    {
+        m_gameWonUiController.MainMenuRequested -= OnMainMenuRequested;
+        MainMenuRequested.Invoke();
     }
 
     public void OnExit(string next)
