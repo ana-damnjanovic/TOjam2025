@@ -9,21 +9,19 @@ public class TransitionUIController : MonoBehaviour
 
     [SerializeField]
     private Canvas m_canvas;
-
-    [SerializeField]
-    private Animation m_animation;
-
+ 
     [SerializeField]
     private Animator m_animator;
+
+    [SerializeField]
+    private float m_displayTime = 2.5f;
+
+    private float m_displayTimeElapsed = 0f;
 
     private bool m_animationStarted = false;
 
     public event System.Action TransitionFinished = delegate { };
 
-    private void Start()
-    {
-
-    }
 
     public void ShowUi(int level, int maxLevel)
     {
@@ -35,6 +33,7 @@ public class TransitionUIController : MonoBehaviour
         m_canvas.gameObject.SetActive(true);
         m_canvas.enabled = true;
 
+        m_displayTimeElapsed = 0f;
         m_animator.Play("Transition Anim");
         m_animationStarted = true;
     }
@@ -43,13 +42,22 @@ public class TransitionUIController : MonoBehaviour
     {
         m_canvas.gameObject.SetActive(false);
         m_canvas.enabled = false;
+        m_animationStarted = false;
     }
 
     private void Update()
     {
-       if (m_animationStarted && m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+       
+       if (m_animationStarted )
         {
-            TransitionFinished.Invoke();
+            if (m_displayTimeElapsed >= m_displayTime && m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            {
+                TransitionFinished.Invoke();
+            }
+            else
+            {
+                m_displayTimeElapsed += Time.deltaTime;
+            }
         }
     }
 }
