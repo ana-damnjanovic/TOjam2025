@@ -1225,6 +1225,7 @@ MonoBehaviour:
   secondPanel: {fileID: 742742588}
   m_animator: {fileID: 1474340932}
   m_displayTime: 5
+  m_levelInstructionsText: {fileID: 152184218}
 --- !u!4 &1809260056
 Transform:
   m_ObjectHideFlags: 0
@@ -1364,6 +1365,7 @@ MonoBehaviour:
   secondPanel: {fileID: 0}
   m_animator: {fileID: 0}
   m_displayTime: 5
+  m_levelInstructionsText: {fileID: 0}
 --- !u!1 &2070428759
 GameObject:
   m_ObjectHideFlags: 0

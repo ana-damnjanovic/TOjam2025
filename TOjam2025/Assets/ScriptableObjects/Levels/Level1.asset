@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   m_levelNum: 1
-  m_levelText: Hour 1
+  m_levelText: WASD to move   don't drop the food!
   m_levelEffect: {fileID: 0}
+  m_numEnemies: 5
   m_foodPrefabs:
   - {fileID: 331668947914739286, guid: 2f65a30ba9399ba419eadab9ed1d1124, type: 3}
