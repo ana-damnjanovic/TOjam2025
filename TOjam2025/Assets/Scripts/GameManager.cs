@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     private void OnIntroCutsceneFinished()
     {
-        m_gameStateMachine.ChangeState(m_gameplayState);
+        m_gameStateMachine.ChangeState(m_transitionState);
     }
 
     private void OnNextLevelRequested()
