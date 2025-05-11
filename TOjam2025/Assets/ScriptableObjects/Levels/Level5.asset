@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Level5
   m_EditorClassIdentifier: 
   m_levelNum: 5
-  m_levelText: Hour 5
+  m_levelText: Your legs are crossed now
   m_levelEffect: {fileID: 11400000, guid: 44d7bb70c661b414aad72fe08b7f18e2, type: 2}
+  m_numEnemies: 5
   m_foodPrefabs:
   - {fileID: 331668947914739286, guid: 2f65a30ba9399ba419eadab9ed1d1124, type: 3}
   - {fileID: 459214540914289263, guid: 6c4df0fb28078e245a3dbf1f2e5af0e8, type: 3}

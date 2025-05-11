@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level6
   m_EditorClassIdentifier: 
   m_levelNum: 6
-  m_levelText: Hour 6
+  m_levelText: Vision blurring...
   m_levelEffect: {fileID: 11400000, guid: 430fa34e3dde2d6468ed4d3da5029ce7, type: 2}
   m_numEnemies: 5
   m_foodPrefabs:

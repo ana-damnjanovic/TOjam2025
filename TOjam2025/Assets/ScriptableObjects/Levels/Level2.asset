@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   m_levelNum: 2
-  m_levelText: Hour 2
+  m_levelText: You're faster now
   m_levelEffect: {fileID: 11400000, guid: 904c3f63949c39f4c8c19abda9a41737, type: 2}
+  m_numEnemies: 5
   m_foodPrefabs:
   - {fileID: 459214540914289263, guid: 6c4df0fb28078e245a3dbf1f2e5af0e8, type: 3}

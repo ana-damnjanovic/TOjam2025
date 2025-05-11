@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   m_levelNum: 4
-  m_levelText: Hour 4
+  m_levelText: Why is everything shaking?
   m_levelEffect: {fileID: 11400000, guid: eddce59fdf5a6ac47bf0b88b14f30763, type: 2}
+  m_numEnemies: 5
   m_foodPrefabs:
   - {fileID: 331668947914739286, guid: 2f65a30ba9399ba419eadab9ed1d1124, type: 3}
   - {fileID: 7049785364638997073, guid: ed17b5f6d86f29243a39bb1716fafe83, type: 3}
