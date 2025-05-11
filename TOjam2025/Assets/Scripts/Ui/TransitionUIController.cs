@@ -19,6 +19,9 @@ public class TransitionUIController : MonoBehaviour
     [SerializeField]
     private float m_displayTime = 5f;
 
+    [SerializeField]
+    private TextMeshProUGUI m_levelInstructionsText;
+
     private float m_displayTimeElapsed = 0f;
 
     private bool m_animationStarted = false;
@@ -27,7 +30,7 @@ public class TransitionUIController : MonoBehaviour
 
     
 
-    public void ShowUi(int level, int maxLevel)
+    public void ShowUi(int level, int maxLevel, string levelText)
     {
         secondPanel.gameObject.SetActive(false);
 
@@ -35,6 +38,8 @@ public class TransitionUIController : MonoBehaviour
 
         nextLevelText.text = level.ToString();
         remainingLevelsText.text = remainingLevels.ToString();
+
+        m_levelInstructionsText.SetText(levelText);
 
         m_canvas.gameObject.SetActive(true);
         m_canvas.enabled = true;
