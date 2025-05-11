@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class IntroCutsceneGameState : IGameState
@@ -7,21 +8,28 @@ public class IntroCutsceneGameState : IGameState
 
     public event System.Action CutsceneFinished = delegate { };
 
+    private CutsceneUiController m_cutsceneUiController;
+
     public IntroCutsceneGameState()
     {
-        // find the script that controls the cutscene here
+        m_cutsceneUiController = GameObject.FindAnyObjectByType<CutsceneUiController>();
     }
 
     public void OnEnter(string previous)
     {
-        // play cutscene
+        m_cutsceneUiController.CutsceneAnimationFinished += OnCutsceneFinished;
+        m_cutsceneUiController.ShowCutscene();
+    }
 
+    private void OnCutsceneFinished()
+    {
+        m_cutsceneUiController.CutsceneAnimationFinished -= OnCutsceneFinished;
         CutsceneFinished.Invoke();
     }
 
     public void OnExit(string next)
     {
-
+        m_cutsceneUiController.HideCutscene();
     }
 
     public void OnOverride(string next)
