@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
     public int GetCurrentLevel => m_currentLevel;
     public int GetMaxLevel => m_levelData.Count;
 
-    public string GetLevelText => m_levelData[m_currentLevel].GetLevelText;
+    public string GetLevelText => m_levelData[m_currentLevel-1].GetLevelText;
 
     public void Initialize()
     {
