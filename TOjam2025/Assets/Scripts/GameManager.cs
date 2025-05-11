@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private PlayerInput m_playerInput;
     private PlayerInputRelay m_playerInputRelay;
 
-    private bool m_sceneLoadCompleted; = false;
+    private bool m_sceneLoadCompleted = false;
     private bool m_splashAnimationFinished = false;
 
     private void Awake()
