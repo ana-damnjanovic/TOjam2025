@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPauseRequested()
     {
-        m_gameStateMachine.OverrideState(m_pauseState);
+        //m_gameStateMachine.OverrideState(m_pauseState);
     }
 
     private void OnGameWonRequested()

@@ -7,30 +7,27 @@ public class CutsceneUiController : MonoBehaviour
     private Canvas m_canvas;
 
     [SerializeField]
-    private float m_animationTime = 10f;
+    private CutscenePlay m_cutscenePlayScript;
 
     public event System.Action CutsceneAnimationFinished = delegate { };
 
     public void ShowCutscene()
     {
         m_canvas.enabled = true;
-        StartCoroutine(AnimationTimer());
+        m_canvas.gameObject.SetActive(true);
+        m_cutscenePlayScript.CutsceneFinished += OnCutsceneFinished;
+        m_cutscenePlayScript.PlayCutscene();
     }
 
     public void HideCutscene()
     {
+        m_canvas.gameObject.SetActive(false);
         m_canvas.enabled = false;
     }
 
-    private IEnumerator AnimationTimer()
+    private void OnCutsceneFinished()
     {
-        float timeElapsed = 0f;
-        while (timeElapsed < m_animationTime)
-        {
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
+        m_cutscenePlayScript.CutsceneFinished -= OnCutsceneFinished;
         CutsceneAnimationFinished.Invoke();
     }
 }

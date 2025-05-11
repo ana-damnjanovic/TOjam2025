@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CutsceneManager : MonoBehaviour
+public class CutscenePlay : MonoBehaviour
 {
     [System.Serializable]
     public class CutsceneFrame
@@ -23,8 +23,13 @@ public class CutsceneManager : MonoBehaviour
 
     private int currentFrame = 0;
 
-    void Start()
+    private bool m_cutsceneStarted = false;
+
+    public event System.Action CutsceneFinished = delegate { };
+
+    public void PlayCutscene()
     {
+        m_cutsceneStarted = true;
         if (frames.Count > 0)
         {
             ShowFrame(currentFrame);
@@ -37,7 +42,7 @@ public class CutsceneManager : MonoBehaviour
 
     void Update()
     {
-        if (currentFrame < frames.Count)
+        if (m_cutsceneStarted && currentFrame < frames.Count)
         {
             timer += Time.deltaTime;
             if (timer >= frameDuration)
@@ -72,6 +77,6 @@ public class CutsceneManager : MonoBehaviour
 
     void EndCutscene()
     {
-        
+        CutsceneFinished.Invoke();
     }
 }
